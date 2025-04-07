@@ -1,0 +1,19 @@
+
+.config-buttons-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 16px 0 ;
+    gap: 10px;
+}
+
+.players-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    overflow-x: auto;
+
+    height: 100%;
+    flex-grow: 0;
+}
