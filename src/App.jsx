@@ -1,21 +1,33 @@
 import './App.css'
 import styles from "./App.module.css"
 
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { GameContext } from './store/GameContext'
 
 import PlayerColumn from './components/PlayerColumn/PlayerColumn'
 
 function App() {
-    const {gameState, addPlayer, removePlayer} = useContext(GameContext)
+    const {
+        gameState, 
+        addPlayer, 
+        removePlayer, 
+        changeTheme,
+        resetGame
+    } = useContext(GameContext)
+
+    useEffect(() => {
+        document.getElementById("body").setAttribute("data-theme", gameState.theme)
+    }, [gameState.theme])
+
     return (<>
             <header><h1>Farkle Companion</h1></header>
             <main>
                 <div className={styles["config-buttons-div"]}>
-                    <button type='button' onClick={addPlayer} >Add player</button>
-                    <button type='button' onClick={removePlayer} >Remove player</button>
-                    <button type='button'>Winner Score</button>
-                    <button type='button'>Reset</button>
+                    <button type='button' onClick={addPlayer} >Add Player</button>
+                    <button type='button' onClick={removePlayer} >Remove Player</button>
+                    <button type='button'>Goal Score</button>
+                    <button type='button' onClick={resetGame}>Reset</button>
+                    <button type="button" onClick={changeTheme}>Theme</button>
                 </div>
                 
                 <div className={styles["players-div"]}>

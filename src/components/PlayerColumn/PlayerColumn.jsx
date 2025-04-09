@@ -1,7 +1,7 @@
 import RoundsHistory from "../RoundsHistory/RoundsHistory"
 import styles from "./PlayerColumn.module.css"
 
-import { useContext, useRef } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { GameContext } from '../../store/GameContext'
 
 export default function PlayerColumn({playerNumber}){
@@ -10,6 +10,17 @@ export default function PlayerColumn({playerNumber}){
 
     const playerInfo = gameState.players[playerNumber]
     const inputRef = useRef(null)
+
+
+    useEffect(() => {
+
+        inputRef.current.addEventListener("focus", () => {
+            setTimeout(() => {
+                inputRef.current.scrollIntoView({behavior: "smooth", block: "center"})
+            }, 300)
+            
+        })
+    }, [inputRef])
 
     function handleAddPoints(){
         const points = inputRef.current.value
@@ -57,7 +68,7 @@ export default function PlayerColumn({playerNumber}){
 
                 <button 
                     type="button" 
-                    id={styles["finnish-button"]}
+                    id={styles["finish-button"]}
                     onClick={handleFinishRound}
                 >Finish</button>
             </div>

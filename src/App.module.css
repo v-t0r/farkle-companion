@@ -4,7 +4,13 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 0 0 16px 0 ;
-    gap: 10px;
+    width: 100%;
+    flex: 1;
+    gap: 1px;
+}
+
+.config-buttons-div button {
+    flex-shrink: 1;
 }
 
 .players-div {
@@ -13,6 +19,8 @@
     justify-content: space-between;
     gap: 10px;
     overflow-x: auto;
+
+    /* padding: 1px; */
 
     height: 100%;
     flex-grow: 0;

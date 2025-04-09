@@ -19,7 +19,8 @@ const initalStateValue = {
         }
     ],
     goalScore: 4000,
-    showBursted: true
+    showBursted: true,
+    theme: "light"
 }
 
 const defaultContextValue = {
@@ -28,7 +29,9 @@ const defaultContextValue = {
     removePlayer: () => {},
     addPoints: () => {},
     finishRound: () => {},
-    burstRound: () => {}
+    burstRound: () => {},
+    changeTheme: () => {},
+    resetGame: () => {}
 }
 
 
@@ -114,6 +117,31 @@ function gameStateReducer(state, action) {
             return newState
         }
 
+        case "CHANGE_THEME": {
+            const newState = structuredClone(state)
+            console.log(state)
+            const newTheme = state.theme === "light" ? "dark" : "light"
+
+            newState.theme = newTheme
+
+            return newState
+        }
+
+        case "RESET_GAME_STATE": {
+            const newState = structuredClone(state)
+            
+            for (var index in newState.players){
+                newState.players[index] = {
+                    name: newState.players[index].name, 
+                    number: newState.players[index].number,
+                    totalPoints: 0,
+                    currentRound: [],
+                    history: []
+                }
+            }
+
+            return newState
+        } 
     }
 
     return state
@@ -155,13 +183,27 @@ export default function GameContextProvider ({children}) {
         })
     }
 
+    function changeTheme(){
+        dispatch({
+            type: "CHANGE_THEME",
+        })
+    }
+
+    function resetGame(){
+        dispatch({
+            type: "RESET_GAME_STATE"
+        })
+    }
+
     const ctxValue = {
         gameState,
         addPlayer,
         removePlayer,
         addPoints,
         finishRound,
-        burstRound
+        burstRound,
+        changeTheme,
+        resetGame
     }
 
     return <GameContext.Provider value={ctxValue}>
