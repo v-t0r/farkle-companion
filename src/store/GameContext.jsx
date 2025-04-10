@@ -20,6 +20,7 @@ const initalStateValue = {
     ],
     goalScore: 4000,
     showBursted: true,
+    playerTurn: 0,
     theme: "light"
 }
 
@@ -31,9 +32,10 @@ const defaultContextValue = {
     finishRound: () => {},
     burstRound: () => {},
     changeTheme: () => {},
-    resetGame: () => {}
+    resetGame: () => {},
+    changeName: () => {},
+    setMaxScore: () => {}
 }
-
 
 export const GameContext = createContext({defaultContextValue})
 
@@ -58,12 +60,15 @@ function gameStateReducer(state, action) {
         case "REMOVE_PLAYER": {
             if(state.players.length <= 2) return state    
             
-            return {
-                ...state,
-                players: [
-                    ...state.players.slice(0, state.players.length-1)
-                ]
+            const newState = structuredClone(state)
+
+            if(state.playerTurn === state.players.length-1){
+                newState.playerTurn = 0
             }
+
+            newState.players = state.players.slice(0, state.players.length-1)
+
+            return newState
         }
 
         case "ADD_POINTS": { 
@@ -93,9 +98,10 @@ function gameStateReducer(state, action) {
 
             player.totalPoints += roundHistory.reduce((acc, current) => acc + current, 0 )
             player.currentRound = []
-            
-
             newState.players[action.payload.playerNumber] = player
+
+            newState.playerTurn = player.number === (state.players.length - 1) ? 0 : player.number + 1
+
             return newState
         }
 
@@ -112,8 +118,10 @@ function gameStateReducer(state, action) {
             }]
 
             player.currentRound = []
-
             newState.players[action.payload.playerNumber] = player
+
+            newState.playerTurn = player.number === (state.players.length - 1) ? 0 : player.number + 1
+            
             return newState
         }
 
@@ -140,8 +148,21 @@ function gameStateReducer(state, action) {
                 }
             }
 
+            newState.playerTurn = 0
+
             return newState
-        } 
+        }
+
+        case "CHANGE_NAME": {
+            const newState = structuredClone(state)
+            
+            newState.players[action.payload.playerNumber].name = action.payload.newName
+            return newState
+        }
+
+        case "SET_MAX_SCORE": {
+            return {...state, goalScore: action.payload.newMaxScore}
+        }
     }
 
     return state
@@ -195,6 +216,20 @@ export default function GameContextProvider ({children}) {
         })
     }
 
+    function changeName(payload){
+        dispatch({
+            type: "CHANGE_NAME",
+            payload: payload
+        })
+    }
+
+    function setMaxScore(payload){
+        dispatch({
+            type: "SET_MAX_SCORE",
+            payload: payload
+        })
+    }
+
     const ctxValue = {
         gameState,
         addPlayer,
@@ -203,7 +238,9 @@ export default function GameContextProvider ({children}) {
         finishRound,
         burstRound,
         changeTheme,
-        resetGame
+        resetGame,
+        changeName,
+        setMaxScore
     }
 
     return <GameContext.Provider value={ctxValue}>

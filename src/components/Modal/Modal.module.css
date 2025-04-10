@@ -1,0 +1,26 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    margin: auto;
+    
+    background-color: var(--bg-color);
+    
+    min-height: 100px;
+    min-width: 100px;
+    max-width: 90%;
+    
+    outline: none;
+    border: none;
+    border-radius: 8px;
+
+    backdrop-filter: blur(100px);
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.553);
+    backdrop-filter: blur(2px);
+}
+

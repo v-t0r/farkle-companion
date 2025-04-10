@@ -10,7 +10,7 @@
 }
 
 .config-buttons-div button {
-    flex-shrink: 1;
+    flex: 1;
 }
 
 .players-div {
@@ -24,4 +24,19 @@
 
     height: 100%;
     flex-grow: 0;
+}
+
+.score-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.score-modal > div {
+    display: flex;
+    flex-direction: column;
+    font-size: small;
 }

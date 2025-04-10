@@ -1,16 +1,20 @@
 import RoundsHistory from "../RoundsHistory/RoundsHistory"
 import styles from "./PlayerColumn.module.css"
 
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { GameContext } from '../../store/GameContext'
+import Modal from "../Modal/Modal"
+import { AnimatePresence } from "motion/react"
 
 export default function PlayerColumn({playerNumber}){
 
-    const {gameState, addPoints, finishRound, burstRound} = useContext(GameContext)
+    const [modalVisibility, setModalVisibility] = useState(false)
 
+
+    const {gameState, addPoints, finishRound, burstRound, changeName} = useContext(GameContext)
     const playerInfo = gameState.players[playerNumber]
+    const isPlayerTurn = (gameState.playerTurn === playerNumber)
     const inputRef = useRef(null)
-
 
     useEffect(() => {
 
@@ -49,36 +53,61 @@ export default function PlayerColumn({playerNumber}){
          inputRef.current.value = ""
     }
 
-    return <div className={styles["player-column"]}>
-        <h2>{playerInfo.name}</h2>
+    return <><div className={styles["player-column"]}>
+        <h2 onClick={() => setModalVisibility(true)} >{playerInfo.name}</h2>
         
         <RoundsHistory playerNumber={playerNumber} />
 
         <p id={styles["score"]}>{`Total: ${playerInfo.totalPoints}`}</p>
         
-        <input ref={inputRef} type="number" placeholder="0" />   
+        <input 
+            ref={inputRef} 
+            type="number" 
+            placeholder="0" 
+            disabled={!isPlayerTurn} 
+        />   
 
         <div className={styles["action-buttons"]}>
             <div>
                 <button 
                     type="button" 
-                    id={styles["add-button"]} 
+                    className={`${isPlayerTurn ? styles["add-button"] : styles["disabled-button"]}`} 
                     onClick={handleAddPoints}
+                    disabled={!isPlayerTurn}
                 >Add</button>
 
                 <button 
                     type="button" 
-                    id={styles["finish-button"]}
+                    className={`${isPlayerTurn ? styles["finish-button"] : styles["disabled-button"]}`} 
                     onClick={handleFinishRound}
+                    disabled={!isPlayerTurn}
                 >Finish</button>
             </div>
         
             <button 
                 type="button" 
-                id={styles["burst-button"]} 
+                className={`${isPlayerTurn ? styles["burst-button"] : styles["disabled-button"]}`}  
                 onClick={handleBurstRound}
+                disabled={!isPlayerTurn}
             >Burst</button>
+
         </div>
 
+        
+
     </div>
+    
+    <AnimatePresence>
+        {modalVisibility && <Modal onEscape={() => setModalVisibility(false)}>
+            <div className={styles["name-modal"]}>
+                <input 
+                    value={gameState.players[playerNumber].name}
+                    onChange={(e) => changeName({playerNumber, newName: e.target.value})}
+                ></input>
+                <button type="button" onClick={() => setModalVisibility(false)}>Ok</button>
+            </div>
+        </Modal>}
+    </AnimatePresence>
+
+    </>
 }

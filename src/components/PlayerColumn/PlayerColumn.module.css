@@ -5,7 +5,6 @@
     min-width: 45%;
 
     height: 100%;
-
 }
 
 #score {
@@ -20,23 +19,12 @@
 }
 
 .player-column input {
-    margin: 4px 0;
     font-size: 1.3rem;
     height: 40px;
-    padding: 8px;
-
-    color: var(--input-text-color);
-    background-color: var(--input-bg-color);
-    border-radius: 5px;outline: var(--input-outline-color);
-    border: none;
-}
-
-.player-column input:focus {
-    outline: solid var(--input-outline-color) 2px;
-    outline-offset: -2px;
 }
 
 .action-buttons {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -55,32 +43,68 @@
     color: white;
 }
 
-#add-button {
+.add-button {
     background-color: rgb(31, 166, 166);
 }
-#add-button:hover {
+.add-button:hover {
     background-color: rgb(36, 185, 185);
 }
-#add-button:active {
+.add-button:active {
     background-color: rgb(28, 148, 148);
 }
 
-#finish-button {
+.finish-button {
     background-color: rgb(61, 182, 61);
 }
-#finish-button:hover {
+.finish-button:hover {
     background-color: rgb(65, 193, 65);
 }
-#finish-button:active {
+.finish-button:active {
     background-color: rgb(55, 165, 55);
 }
 
-#burst-button {
+.burst-button {
     background-color: rgb(215, 69, 69);
 }
-#burst-button:hover {
+.burst-button:hover {
     background-color: rgb(241, 77, 77);
 }
-#burst-button:active {
+.burst-button:active {
     background-color: rgb(187, 60, 60);
+}
+
+.disabled-button {
+    background-color: rgb(65, 65, 65);
+    color: grey !important;
+    cursor: default;
+}
+
+.name-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-modal > input {
+    font-size: 1.1rem;
+    height: 40px;
+    width: 200px
+}
+
+.block-wall { 
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.279);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 450px) {
+    .player-column h2 {
+        font-size: 1.2rem;
+    }
+
 }

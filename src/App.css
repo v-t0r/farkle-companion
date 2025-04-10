@@ -81,3 +81,18 @@ button {
     background-color: var(--button-bg-color);
     cursor: pointer;
 }
+
+input {
+    margin: 4px 0;
+    padding: 8px;
+
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+    border-radius: 5px;outline: var(--input-outline-color);
+    border: none;
+}
+
+input:focus {
+    outline: solid var(--input-outline-color) 2px;
+    outline-offset: -2px;
+}

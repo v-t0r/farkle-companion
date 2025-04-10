@@ -15,6 +15,18 @@
     overflow-y: auto;
 }
 
+.round-li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.round-li > p {
+    font-weight: 500;
+    text-align: center;
+}
+
 .round-div {
     text-align: center;
 

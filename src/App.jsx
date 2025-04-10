@@ -1,18 +1,23 @@
 import './App.css'
 import styles from "./App.module.css"
 
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { GameContext } from './store/GameContext'
 
 import PlayerColumn from './components/PlayerColumn/PlayerColumn'
+import Modal from './components/Modal/Modal'
 
 function App() {
+
+    const [modalVisibility, setModalVisibility] = useState(false)
+
     const {
         gameState, 
         addPlayer, 
         removePlayer, 
         changeTheme,
-        resetGame
+        resetGame,
+        setMaxScore
     } = useContext(GameContext)
 
     useEffect(() => {
@@ -25,7 +30,7 @@ function App() {
                 <div className={styles["config-buttons-div"]}>
                     <button type='button' onClick={addPlayer} >Add Player</button>
                     <button type='button' onClick={removePlayer} >Remove Player</button>
-                    <button type='button'>Goal Score</button>
+                    <button type='button' onClick={() => setModalVisibility(true)}>Max Score</button>
                     <button type='button' onClick={resetGame}>Reset</button>
                     <button type="button" onClick={changeTheme}>Theme</button>
                 </div>
@@ -40,6 +45,23 @@ function App() {
                     })}
                 </div>
             </main>
+
+            {modalVisibility && <Modal onEscape={() => setModalVisibility(false)} >
+                <div className={styles["score-modal"]}>
+                    <div>
+                        <label>Max Score</label>
+                        <input 
+                            type="number"
+                            value={gameState.goalScore}
+                            onChange={(e) => setMaxScore({newMaxScore: e.target.value})}></input>
+                    </div>
+                    
+                    <button type='button' onClick={() => setModalVisibility(false)}>Ok</button>
+                </div>
+                
+            </Modal>}
+            
+
         </>
     )
 }
