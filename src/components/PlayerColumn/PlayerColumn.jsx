@@ -10,8 +10,7 @@ export default function PlayerColumn({playerNumber}){
 
     const [modalVisibility, setModalVisibility] = useState(false)
 
-
-    const {gameState, addPoints, finishRound, burstRound, changeName} = useContext(GameContext)
+    const {gameState, addPoints, finishRound, burstRound} = useContext(GameContext)
     const playerInfo = gameState.players[playerNumber]
     const isPlayerTurn = (gameState.playerTurn === playerNumber)
     const inputRef = useRef(null)
@@ -71,14 +70,14 @@ export default function PlayerColumn({playerNumber}){
             <div>
                 <button 
                     type="button" 
-                    className={`${isPlayerTurn ? styles["add-button"] : styles["disabled-button"]}`} 
+                    className={`${isPlayerTurn ? styles["add-button"] : "disabled-button"}`} 
                     onClick={handleAddPoints}
                     disabled={!isPlayerTurn}
                 >Add</button>
 
                 <button 
                     type="button" 
-                    className={`${isPlayerTurn ? styles["finish-button"] : styles["disabled-button"]}`} 
+                    className={`${isPlayerTurn ? styles["finish-button"] : "disabled-button"}`} 
                     onClick={handleFinishRound}
                     disabled={!isPlayerTurn}
                 >Finish</button>
@@ -86,7 +85,7 @@ export default function PlayerColumn({playerNumber}){
         
             <button 
                 type="button" 
-                className={`${isPlayerTurn ? styles["burst-button"] : styles["disabled-button"]}`}  
+                className={`${isPlayerTurn ? styles["burst-button"] : "disabled-button"}`}  
                 onClick={handleBurstRound}
                 disabled={!isPlayerTurn}
             >Burst</button>
@@ -99,15 +98,32 @@ export default function PlayerColumn({playerNumber}){
     
     <AnimatePresence>
         {modalVisibility && <Modal onEscape={() => setModalVisibility(false)}>
-            <div className={styles["name-modal"]}>
-                <input 
-                    value={gameState.players[playerNumber].name}
-                    onChange={(e) => changeName({playerNumber, newName: e.target.value})}
-                ></input>
-                <button type="button" onClick={() => setModalVisibility(false)}>Ok</button>
-            </div>
+            <ChangePlayerNameForm playerNumber={playerNumber} onClose={() => setModalVisibility(false)} />
         </Modal>}
     </AnimatePresence>
 
     </>
+}
+
+function ChangePlayerNameForm({playerNumber, onClose}){
+    const {gameState, changeName} = useContext(GameContext)
+    const [newName, setNewName] = useState(gameState.players[playerNumber].name)
+    
+    function handleChangeName(){
+        changeName({newName: newName.trim(), playerNumber})
+        onClose()
+    }
+
+    return <div className={styles["name-modal"]}>
+        <input 
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+        ></input>
+        <button 
+            type="button" 
+            onClick={handleChangeName}
+            disabled={newName.trim() == ""}
+            className={newName.trim() == "" ? "disabled-button" : undefined}    
+        >Ok</button>
+    </div>
 }

@@ -1,5 +1,5 @@
 
-.config-buttons-div{
+.buttons-div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -9,8 +9,14 @@
     gap: 1px;
 }
 
-.config-buttons-div button {
-    flex: 1;
+.config-buttons-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.config-button {
+    min-width: 30px;
 }
 
 .players-div {
@@ -26,17 +32,20 @@
     flex-grow: 0;
 }
 
-.score-modal {
+.modal {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     gap: 10px;
+
+    min-width: 100px;
 }
 
-.score-modal > div {
+.modal label {
     display: flex;
     flex-direction: column;
     font-size: small;
 }
+

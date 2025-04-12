@@ -16,6 +16,9 @@
 
 .player-column h2 {
     text-align: center;
+    cursor: pointer;
+
+    overflow: hidden;
 }
 
 .player-column input {
@@ -71,12 +74,6 @@
 }
 .burst-button:active {
     background-color: rgb(187, 60, 60);
-}
-
-.disabled-button {
-    background-color: rgb(65, 65, 65);
-    color: grey !important;
-    cursor: default;
 }
 
 .name-modal {

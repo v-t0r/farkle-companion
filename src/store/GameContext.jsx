@@ -18,10 +18,11 @@ const initalStateValue = {
             history: []
         }
     ],
-    goalScore: 4000,
+    maxScore: 4000,
     showBursted: true,
     playerTurn: 0,
-    theme: "light"
+    theme: "light",
+    isNewGame: true
 }
 
 const defaultContextValue = {
@@ -42,6 +43,8 @@ export const GameContext = createContext({defaultContextValue})
 function gameStateReducer(state, action) {
     switch(action.type){
         case "ADD_PLAYER": {
+            if(!state.isNewGame) return state
+
             return {
                 ...state,
                 players: [
@@ -58,7 +61,7 @@ function gameStateReducer(state, action) {
         }
         
         case "REMOVE_PLAYER": {
-            if(state.players.length <= 2) return state    
+            if(state.players.length <= 2 || !state.isNewGame) return state    
             
             const newState = structuredClone(state)
 
@@ -102,6 +105,8 @@ function gameStateReducer(state, action) {
 
             newState.playerTurn = player.number === (state.players.length - 1) ? 0 : player.number + 1
 
+            newState.isNewGame = false
+
             return newState
         }
 
@@ -122,12 +127,13 @@ function gameStateReducer(state, action) {
 
             newState.playerTurn = player.number === (state.players.length - 1) ? 0 : player.number + 1
             
+            newState.isNewGame = false
+
             return newState
         }
 
         case "CHANGE_THEME": {
             const newState = structuredClone(state)
-            console.log(state)
             const newTheme = state.theme === "light" ? "dark" : "light"
 
             newState.theme = newTheme
@@ -149,6 +155,7 @@ function gameStateReducer(state, action) {
             }
 
             newState.playerTurn = 0
+            newState.isNewGame = true
 
             return newState
         }
@@ -161,7 +168,9 @@ function gameStateReducer(state, action) {
         }
 
         case "SET_MAX_SCORE": {
-            return {...state, goalScore: action.payload.newMaxScore}
+            if(!state.isNewGame) return state
+            
+            return {...state, maxScore: action.payload.newMaxScore}
         }
     }
 

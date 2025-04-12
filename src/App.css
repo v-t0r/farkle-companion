@@ -34,6 +34,10 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   color: var(--text-color);
+
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
 }
 
 
@@ -71,6 +75,9 @@ main {
 }
 
 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 60px;
     width: fit-content;
     border: none;
@@ -80,6 +87,12 @@ button {
     color: var(--button-text-color);
     background-color: var(--button-bg-color);
     cursor: pointer;
+}
+
+.disabled-button {
+    background-color: rgb(65, 65, 65);
+    color: grey !important;
+    cursor: default;
 }
 
 input {
@@ -95,4 +108,13 @@ input {
 input:focus {
     outline: solid var(--input-outline-color) 2px;
     outline-offset: -2px;
+}
+
+.material-icons {
+    color: var(--button-text-color);
+    font-size: 1.2rem;
+}
+
+.disabled-button > .material-icons {
+    color: grey !important;
 }
