@@ -10,6 +10,7 @@ import { AnimatePresence } from 'motion/react'
 
 import { winnerPlayer } from "./utils/functions"
 import GameConfigForm from './components/GameConfigForm/GameConfigForm'
+import ThemeToggle from './components/ThemeToggle/ThemeToggle'
 
 function App() {
 
@@ -52,7 +53,8 @@ function App() {
                         <button type='button' onClick={resetGame}>Reset</button>
                     </div>
                     
-                    <button type="button" onClick={changeTheme}>Theme</button>
+                    {/* <button type="button" onClick={changeTheme}>Theme</button> */}
+                    <ThemeToggle onChange={changeTheme} currentTheme={gameState.theme} />
                 </div>
                 
                 <div className={styles["players-div"]}>

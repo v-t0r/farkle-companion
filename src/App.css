@@ -2,6 +2,7 @@
     --bg-color: white;
     
     --light-color: rgb(240, 240, 240);
+    --dark-color: rgb(170, 170, 170);
     
     --text-color: black;
     
@@ -11,12 +12,16 @@
     --input-bg-color: rgb(240, 240, 240);
     --input-text-color: black;
     --input-outline-color: rgb(120, 120, 120);
+
+    --toggle-bg-color: rgb(229, 229, 229);
+    --toggle-color: white;
 }
 
 [data-theme="dark"] {
     --bg-color: rgb(33, 33, 33);
     
     --light-color: rgb(47, 47, 47);
+    --dark-color: rgb(35, 35, 35);
     
     --text-color: rgb(255, 255, 255);
     
@@ -26,6 +31,9 @@
     --input-bg-color: rgb(47, 47, 47);
     --input-text-color: white;
     --input-outline-color: rgb(120, 120, 120);
+
+    --toggle-bg-color: rgb(69, 69, 69);
+    --toggle-color: rgb(110, 110, 110);
 }
 
 * {
