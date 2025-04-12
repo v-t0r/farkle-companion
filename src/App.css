@@ -15,6 +15,9 @@
 
     --toggle-bg-color: rgb(229, 229, 229);
     --toggle-color: white;
+
+    --bg-image: url("./assets/day.jpg");
+    --main-bg-color: rgb(255, 255, 255);
 }
 
 [data-theme="dark"] {
@@ -34,6 +37,9 @@
 
     --toggle-bg-color: rgb(69, 69, 69);
     --toggle-color: rgb(110, 110, 110);
+
+    --bg-image: url("./assets/night.jpg");
+    --main-bg-color: rgb(33, 33, 33);
 }
 
 * {
@@ -48,7 +54,6 @@
   user-select: none;
 }
 
-
 body {
     background-color: var(--bg-color);
 }
@@ -56,8 +61,12 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    justify-content: center;
+    height: 100vh;
     flex-grow: 0;
+    background-image: var(--bg-image);
+    background-position: center;
+    background-size: cover;
 }
 
 header {
@@ -66,20 +75,19 @@ header {
     align-items: center;
 }
 
-header h1 {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-weight: 100;
-    margin: 10px;
-}
-
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
     max-width: 600px;
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
+    width: 95%;
+    height: 90%;
+    margin:  auto;
     flex-grow: 0;
+    background-color: var(--main-bg-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.384);
 }
 
 button {
@@ -125,4 +133,19 @@ input:focus {
 
 .disabled-button > .material-icons {
     color: grey !important;
+}
+
+
+@media screen and (max-width: 450px) {
+    #root {
+        height: 90vh;
+        background-image: none;
+    }
+
+    main{
+        padding: 10px;
+        height: 95%;
+        box-shadow: none;
+    }
+
 }

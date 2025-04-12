@@ -1,4 +1,16 @@
 
+.main h1 {
+    text-align: center;
+    font-family: "Cardo", sans-serif;
+    font-weight: 800;
+    margin: 8px;
+
+}
+
+.header img {
+    width: 35px;
+}
+
 .buttons-div{
     display: flex;
     flex-direction: row;

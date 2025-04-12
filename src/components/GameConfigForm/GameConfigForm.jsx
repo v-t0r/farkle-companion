@@ -34,6 +34,11 @@ export default function GameConfigForm({onClose}){
                 value={newMaxScore}
                 onChange={(e) => setNewMaxScore(e.target.value)}></input>
         </div>
-        <button type="button" onClick={handleSave}>Ok</button>
+        <button 
+            type="button" 
+            onClick={handleSave}
+            disabled={newMaxScore <= 0}
+            className={newMaxScore <= 0 ? "disabled-button" : undefined}
+        >Ok</button>
     </>
 }

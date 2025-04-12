@@ -38,8 +38,9 @@ function App() {
     }, [gameState.players, gameState.maxScore])
 
     return (<>
-            <header><h1>Farkle Companion</h1></header>
-            <main>
+
+            <main className={styles["main"]}>
+                <h1>Farkle Companion</h1>
                 <div className={styles["buttons-div"]}>
                     <div className={styles["config-buttons-div"]} >
                         <button 

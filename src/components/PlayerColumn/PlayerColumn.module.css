@@ -19,6 +19,7 @@
     cursor: pointer;
 
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .player-column input {
