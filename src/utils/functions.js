@@ -9,7 +9,6 @@ function isEveryoneInTheSameRound(players){
 }
 
 export function winnerPlayer(players, maxScore) { 
-
     //rounds nao sincronizados
     if (!isEveryoneInTheSameRound(players)) return -1
 
