@@ -1,12 +1,20 @@
-# React + Vite
+# 🎲 Farkle Companion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Farkle Companion** is a website made to help people keep track of their scores while playing the dice game *Farkle*.
 
-Currently, two official plugins are available:
+It can be boring and cumbersome to track your score using a calculator and paper, or a notepad on your smartphone—especially since you can "burst" and need to ignore the score from that round.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+With this website, you can easily keep track of your score while playing with friends.
 
-## Expanding the ESLint configuration
+You can try it out here: [https://farkle-companion.vercel.app/](https://farkle-companion.vercel.app/)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![preview](https://github.com/user-attachments/assets/2eabef54-f64b-4aa7-9aaa-6a2621ec2337)
+
+## ✨ Features
+
+- 🎮 Track multiple players' scores  
+- 🎯 Set a custom maximum score  
+- 👥 Customize player names  
+- 🏆 Automatically detect when a player wins or there's a tie  
+- 🔁 Automatically manage turns  
+- 🌗 Light and dark mode support 
